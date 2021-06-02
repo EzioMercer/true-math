@@ -1,6 +1,39 @@
 # true-math
+True Math - math library for numbers of arbitrary length
+
+## Install
+```
+npm install true-math --save
+```
+
+## Usage
+
+Just import `TM` (True Math) from `true-math` library and use available functions
 
 Available functions:
-* sum
-* subtraction
+* sum ([string]): string
+* subtraction ([string]): string
+
+## Example
+
+Import `TM` from `true-math` in the file test.js
+
+```
+import TM from 'true-math';
+```
+
+then call available functions like shown below:
+
+```
+const testData = ['0.1001', '0.0002'];
+
+console.log('\nTest for:', testData);
+console.log('Sum is : ', TM.sum(testData));
+console.log('Difference is : ', TM.subtract(testData));
+
+```
+
+## License
+GPL-3.0-only
+
 
