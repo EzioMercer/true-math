@@ -10,8 +10,8 @@ export default function deleteUnnecessaryZeros(num) {
 		else break;
 	}
 
-	for (let digit = num.length - 1; digit > dotPosition; --digit) {
-		if(num[digit] === '0') --endZerosCount;
+	for (let digit = num.length - 1; digit >= dotPosition; --digit) {
+		if(num[digit] === '0' || num[digit] === '.') --endZerosCount;
 		else break;
 	}
 

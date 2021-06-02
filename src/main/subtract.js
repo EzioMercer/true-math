@@ -6,6 +6,7 @@ export function subtract2nums(num1, num2) {
 
 	let longest_DP_length;
 	[num1, num2, longest_DP_length] = Helpers.makeNumsSameLength(num1, num2);
+
 	const needMinus = !Helpers.isFirstBiggerByAbsoluteValue(num1, num2);
 
 	if (needMinus) {
@@ -14,17 +15,10 @@ export function subtract2nums(num1, num2) {
 
 	let memory = 0;
 
-	for (let digit = 0; digit < num1.length; ++digit) {
+	for (let digit = num1.length - 1; digit > 0; --digit) {
 
-		if (memory === -1) {
-			if (num1[digit] === 0) num1[digit] = 9;
-			else {
-				--num1[digit];
-				memory = 0;
-			}
-		}
-
-		num1[digit] -= num2[digit];
+		num1[digit] = memory + num1[digit] - num2[digit];
+		memory = 0;
 
 		if (num1[digit] < 0) {
 			num1[digit] += 10;

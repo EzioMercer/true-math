@@ -1,5 +1,18 @@
 #IDEA
 .idea
 
+#LIBS
+node_modules
+
+#ES5 VERSION
+es5
+
+#MINIFIED VERSION FROM ES5 VERSION
+minified_from_es5
+
+#SETTINGS
+babel.config.json
+webpack.config.js
+
 #TEST FILES
 test.js

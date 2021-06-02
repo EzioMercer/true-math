@@ -9,19 +9,18 @@ export function sum2nums(num1, num2) {
 
 	let memory = 0;
 
-	for (let digit = 0; digit < num1.length; ++digit) {
-		let digitsSum = memory + num1[digit] + num2[digit];
+	for (let digit = num1.length - 1; digit > 0; --digit) {
+
+		num1[digit] = memory + num1[digit] + num2[digit];
 		memory = 0;
 
-		if (digitsSum >= 10) {
-			num1[digit] = digitsSum - 10;
+		if (num1[digit] >= 10) {
+			num1[digit] -= 10;
 			memory = 1;
-		} else {
-			num1[digit] = digitsSum;
 		}
 	}
 
-	if (memory === 1) num1.push(1);
+	if (memory === 1) return '1' + Helpers.returnNum(num1, longest_DP_length);
 
 	return Helpers.returnNum(num1, longest_DP_length);
 }

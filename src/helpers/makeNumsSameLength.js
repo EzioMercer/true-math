@@ -12,8 +12,8 @@ export default function makeNumsSameLength(num1, num2) {
 	num1_DP = num1_DP.padEnd(longest_DP_length, '0');
 	num2_DP = num2_DP.padEnd(longest_DP_length, '0');
 
-	num1 = (num1_IP + num1_DP).split('').map(digit => +digit).reverse();
-	num2 = (num2_IP + num2_DP).split('').map(digit => +digit).reverse();
+	num1 = (num1_IP + num1_DP).split('').map(digit => +digit);
+	num2 = (num2_IP + num2_DP).split('').map(digit => +digit);
 
 	return [num1, num2, longest_DP_length];
 }

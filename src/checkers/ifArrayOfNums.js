@@ -1,4 +1,4 @@
-export default function checkIfArrayOfNums(nums) {
+export default function ifArrayOfNums(nums) {
 
 	const regexp = /(^-?)(\d+)(\.\d+)?$/;
 
