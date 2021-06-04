@@ -1,4 +1,4 @@
-import Helpers from "./helpers.js";
+import {deleteUnnecessaryZeros} from "./helpers.js";
 
 export  default function returnNum(num, DP_length = 0) {
 
@@ -6,5 +6,5 @@ export  default function returnNum(num, DP_length = 0) {
 
 	if (dotPosition !== num.length) num.splice(dotPosition, 0, '.');
 
-	return Helpers.deleteUnnecessaryZeros(num.join(''));
+	return deleteUnnecessaryZeros(num.join(''));
 }

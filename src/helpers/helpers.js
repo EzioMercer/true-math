@@ -1,13 +1,15 @@
 import deleteUnnecessaryZeros from './deleteUnnecessaryZeros.js';
-import isFirstBiggerByAbsoluteValue from "./isFirstBiggerByAbsoluteValue.js";
 import makeNumsSameLength from "./makeNumsSameLength.js";
 import returnNum from "./returnNum.js";
 import isNegative from "./isNegative.js";
+import getNegative from "./getNegative.js";
+import numToDigitsArray from "./numToDigitsArray.js";
 
-export default {
+export {
 	deleteUnnecessaryZeros,
-	isFirstBiggerByAbsoluteValue,
 	makeNumsSameLength,
 	returnNum,
-	isNegative
+	isNegative,
+	getNegative,
+	numToDigitsArray
 }

@@ -8,18 +8,20 @@ npm install true-math --save
 
 ## Usage
 
-Just import `TM` (True Math) from `true-math` library and use available functions
+Just import need functions from `true-math` library and use them
 
 Available functions:
 * sum ([string]): string
 * subtraction ([string]): string
+* abs(string): string
+* compare(string, string): number
 
 ## Example
 
-Import `TM` from `true-math` in the file test.js
+Import `{needFuntions}` from `true-math` in the file test.js
 
 ```
-import TM from 'true-math';
+import {sum, subtract, ...} from 'true-math';
 ```
 
 then call available functions like shown below:
@@ -28,8 +30,8 @@ then call available functions like shown below:
 const testData = ['0.1001', '0.0002'];
 
 console.log('\nTest for:', testData);
-console.log('Sum is : ', TM.sum(testData));
-console.log('Difference is : ', TM.subtract(testData));
+console.log('Sum is : ', sum(testData));
+console.log('Difference is : ', subtract(testData));
 
 ```
 
