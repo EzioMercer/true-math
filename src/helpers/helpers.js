@@ -1,15 +1,19 @@
 import deleteUnnecessaryZeros from './deleteUnnecessaryZeros.js';
 import makeNumsSameLength from "./makeNumsSameLength.js";
-import returnNum from "./returnNum.js";
-import isNegative from "./isNegative.js";
+import arrayNumToString from "./arrayNumToString.js";
+import sign from "./sign.js";
 import getNegative from "./getNegative.js";
 import numToDigitsArray from "./numToDigitsArray.js";
+import makeNumTargetLength from "./makeNumTargetLength.js";
+import splitNum from "./splitNum.js";
 
 export {
 	deleteUnnecessaryZeros,
 	makeNumsSameLength,
-	returnNum,
-	isNegative,
+	arrayNumToString,
+	sign,
 	getNegative,
-	numToDigitsArray
+	numToDigitsArray,
+	makeNumTargetLength,
+	splitNum
 }

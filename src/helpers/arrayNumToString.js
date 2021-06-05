@@ -1,6 +1,6 @@
 import {deleteUnnecessaryZeros} from "./helpers.js";
 
-export  default function returnNum(num, DP_length = 0) {
+export default function arrayNumToString(num, DP_length = 0) {
 
 	let dotPosition = num.length - DP_length;
 

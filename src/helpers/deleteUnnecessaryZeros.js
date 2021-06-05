@@ -1,8 +1,8 @@
-import {isNegative} from "./helpers.js";
+import {sign} from "./helpers.js";
 
 export default function deleteUnnecessaryZeros(num) {
 
-	let needMinus = isNegative(num);
+	let needMinus = sign(num) === -1;
 
 	if (needMinus) num = num.slice(1);
 
