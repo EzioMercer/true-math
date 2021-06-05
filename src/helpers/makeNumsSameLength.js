@@ -11,5 +11,9 @@ export default function makeNumsSameLength(num1, num2) {
 	[num1_IP, num1_DP] = makeNumTargetLength(num1_IP, num1_DP, targetIntegerLength, targetDecimalLength);
 	[num2_IP, num2_DP] = makeNumTargetLength(num2_IP, num2_DP, targetIntegerLength, targetDecimalLength);
 
-	return [num1_IP + num1_DP, num2_IP + num2_DP, targetDecimalLength];
+	if (targetDecimalLength !== 0) {
+		return [num1_IP + '.' + num1_DP, num2_IP + '.' + num2_DP, targetDecimalLength];
+	}
+
+	return [num1_IP + num1_DP, num2_IP + num2_DP];
 }

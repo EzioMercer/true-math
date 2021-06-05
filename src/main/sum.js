@@ -1,55 +1,60 @@
 import {ifArray, ifArrayOfNums} from '../checkers/checkers.js';
 import {
 	makeNumsSameLength,
-	arrayNumToString,
 	deleteUnnecessaryZeros,
 	sign,
-	numToDigitsArray
 } from '../helpers/helpers.js';
-import {abs, compare} from "../true-math.js";
+import {abs} from "../true-math.js";
 import {compareAbsolutedNums} from "./compare.js";
 
 export function sum2nums(num1, num2) {
 
 	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
 	const [num1IsNegative, num2IsNegative] = [num1Sign === -1, num2Sign === -1];
-	let [absNum1, absNum2, targetDecimalLength] = makeNumsSameLength(abs(num1), abs(num2));
+	let [absNum1, absNum2] = makeNumsSameLength(abs(num1), abs(num2));
 	const isSecondBigger = compareAbsolutedNums(absNum1, absNum2) === -1;
-	let [absNum1Arrayed, absNum2Arrayed] = [numToDigitsArray(absNum1), numToDigitsArray(absNum2)];
 	let needMinus = false;
+	let sum = '';
 
 	let multiplier = 1;
 
 	multiplier *= num1Sign * num2Sign;
 
 	if (multiplier === -1 && isSecondBigger) {
-		[absNum1Arrayed, absNum2Arrayed] = [absNum2Arrayed, absNum1Arrayed];
+		[absNum1, absNum2] = [absNum2, absNum1];
 	}
 
 	if (num1IsNegative && (num2IsNegative || !isSecondBigger) || num2IsNegative && isSecondBigger) {
-
 		needMinus = true;
 	}
 
 	let memory = 0;
 
-	for (let digit = absNum1Arrayed.length - 1; digit >= 0; --digit) {
+	for (let digit = absNum1.length - 1; digit >= 0; --digit) {
 
-		absNum1Arrayed[digit] = memory + absNum1Arrayed[digit] + multiplier * absNum2Arrayed[digit];
+		if (absNum1[digit] === '.') {
+			sum = '.' + sum;
+			continue;
+		}
+
+		let result = memory + (+absNum1[digit]) + multiplier * (+absNum2[digit]);
 		memory = 0;
 
-		if (absNum1Arrayed[digit] >= 10 || absNum1Arrayed[digit] < 0) {
-			absNum1Arrayed[digit] += multiplier * -10;
+		if (result >= 10 || result < 0) {
+			result += multiplier * -10;
 			memory = multiplier;
 		}
+
+		sum = result + sum;
+
 	}
 
-	let num = arrayNumToString(absNum1Arrayed, targetDecimalLength);
+	sum = deleteUnnecessaryZeros(sum);
 
-	if (memory === 1) num = '1' + num;
-	if (needMinus && num !== '0') num = '-' + num;
+	if (memory === 1) sum = '1' + sum;
+	if (needMinus && sum !== '0') sum = '-' + sum;
 
-	return num;
+	return sum;
 }
 
 export function sumWithoutChecking(nums) {
