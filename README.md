@@ -11,10 +11,12 @@ npm install true-math --save
 Just import need functions from `true-math` library and use them
 
 Available functions:
-* sum ([string]): string
-* subtraction ([string]): string
 * abs(string): string
+* ceil(string): string
 * compare(string, string): number
+* floor(string): string
+* subtraction ([string]): string
+* sum ([string]): string
 
 ## Example
 

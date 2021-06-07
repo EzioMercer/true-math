@@ -1,24 +1,36 @@
-import {ifArray, ifArrayOfNums} from '../checkers/checkers.js';
+import {ifArray, ifValidNums} from '../checkers/checkers.js';
 import {
 	makeNumsSameLength,
 	deleteUnnecessaryZeros,
-	sign,
+	sign
 } from '../helpers/helpers.js';
 import {abs} from "../true-math.js";
-import {compareAbsolutedNums} from "./compare.js";
+import {compareUnsafe} from "./compare.js";
+
+function sumDigits(digit1, digit2, sum, memory, multiplier) {
+
+	let result = memory + digit1 + multiplier * digit2;
+	memory = 0;
+
+	if (result >= 10 || result < 0) {
+		result += multiplier * -10;
+		memory = multiplier;
+	}
+
+	sum = result + sum;
+
+	return [sum, memory];
+}
 
 export function sum2nums(num1, num2) {
 
-	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
-	const [num1IsNegative, num2IsNegative] = [num1Sign === -1, num2Sign === -1];
-	let [absNum1, absNum2] = makeNumsSameLength(abs(num1), abs(num2));
-	const isSecondBigger = compareAbsolutedNums(absNum1, absNum2) === -1;
+	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(abs(num1), abs(num2));
 	let needMinus = false;
 	let sum = '';
-
-	let multiplier = 1;
-
-	multiplier *= num1Sign * num2Sign;
+	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
+	const [num1IsNegative, num2IsNegative] = [num1Sign === -1, num2Sign === -1];
+	const isSecondBigger = compareUnsafe(absNum1, absNum2) === -1;
+	let multiplier = num1Sign * num2Sign || num1Sign || num2Sign;
 
 	if (multiplier === -1 && isSecondBigger) {
 		[absNum1, absNum2] = [absNum2, absNum1];
@@ -30,23 +42,19 @@ export function sum2nums(num1, num2) {
 
 	let memory = 0;
 
-	for (let digit = absNum1.length - 1; digit >= 0; --digit) {
+	for (let digit = absNum1.length - 1; digit >= absNum1.length - decimalPartLength; --digit) {
+		[sum, memory] = sumDigits((+absNum1[digit]), (+absNum2[digit]), sum, memory, multiplier);
+	}
 
-		if (absNum1[digit] === '.') {
-			sum = '.' + sum;
-			continue;
-		}
+	let integerBeginning = absNum1.length - decimalPartLength - 1;
 
-		let result = memory + (+absNum1[digit]) + multiplier * (+absNum2[digit]);
-		memory = 0;
+	if (decimalPartLength !== 0) {
+		sum = '.' + sum;
+		--integerBeginning;
+	}
 
-		if (result >= 10 || result < 0) {
-			result += multiplier * -10;
-			memory = multiplier;
-		}
-
-		sum = result + sum;
-
+	for (let digit = integerBeginning; digit >= 0; --digit) {
+		[sum, memory] = sumDigits((+absNum1[digit]), (+absNum2[digit]), sum, memory, multiplier);
 	}
 
 	sum = deleteUnnecessaryZeros(sum);
@@ -57,26 +65,24 @@ export function sum2nums(num1, num2) {
 	return sum;
 }
 
-export function sumWithoutChecking(nums) {
-
-	nums = nums.map(num => deleteUnnecessaryZeros(num));
+export function sumUnsafe(nums) {
 
 	if (nums.length === 0) return '0';
 	if (nums.length === 1) return nums[0];
 
 	let sum = nums[0];
 
-	for(let num = 1; num < nums.length; ++num) {
+	for (let num = 1; num < nums.length; ++num) {
 		sum = sum2nums(sum, nums[num]);
 	}
 
 	return sum;
 }
 
-export default function sum (nums) {
+export default function sum(nums) {
 
 	ifArray(nums);
-	ifArrayOfNums(nums);
+	ifValidNums(nums);
 
-	return sumWithoutChecking(nums)
+	return sumUnsafe(nums.map(num => deleteUnnecessaryZeros(num)))
 }

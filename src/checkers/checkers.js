@@ -1,7 +1,9 @@
 import ifArray from './ifArray.js';
-import ifArrayOfNums from './ifArrayOfNums.js';
+import ifValidNums from './ifValidNums.js';
+import ifValidNum from "./ifValidNum/ifValidNum.js";
 
 export {
 	ifArray,
-	ifArrayOfNums
+	ifValidNums,
+	ifValidNum
 }

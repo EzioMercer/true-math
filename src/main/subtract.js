@@ -1,19 +1,24 @@
-import {ifArray, ifArrayOfNums} from '../checkers/checkers.js';
-import getNegative from "../helpers/getNegative.js";
-import {sumWithoutChecking} from "./sum.js";
+import {ifArray, ifValidNums} from '../checkers/checkers.js';
+import changeSign from "../helpers/changeSign.js";
+import {sum2nums, sumUnsafe} from "./sum.js";
+import {deleteUnnecessaryZeros} from "../helpers/helpers.js";
 
-export function subtractWithoutChecking(nums) {
-	for(let num = 1; num < nums.length; ++num) {
-		nums[num] = getNegative(nums[num]);
-	}
-
-	return sumWithoutChecking(nums);
+export function subtract2nums(num1, num2) {
+	return sum2nums(num1, changeSign(num2));
 }
 
-export default function subtract (nums) {
+export function subtractUnsafe(nums) {
+	for (let num = 1; num < nums.length; ++num) {
+		nums[num] = changeSign(nums[num]);
+	}
+
+	return sumUnsafe(nums.map(num => deleteUnnecessaryZeros(num)));
+}
+
+export default function subtract(nums) {
 
 	ifArray(nums);
-	ifArrayOfNums(nums);
+	ifValidNums(nums);
 
-	return subtractWithoutChecking(nums)
+	return subtractUnsafe(nums)
 }

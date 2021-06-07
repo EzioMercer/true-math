@@ -1,19 +1,19 @@
-import {makeNumTargetLength, splitNum} from "./helpers.js";
+import {padNums, split} from "./helpers.js";
 
 export default function makeNumsSameLength(num1, num2) {
 
-	let [num1_IP, num1_DP] = splitNum(num1);
-	let [num2_IP, num2_DP] = splitNum(num2);
+	let [num1IntegerPart, num1DecimalPart] = split(num1);
+	let [num2IntegerPart, num2DecimalPart] = split(num2);
 
-	let targetIntegerLength = num1_IP.length > num2_IP.length ? num1_IP.length : num2_IP.length;
-	let targetDecimalLength = num1_DP.length > num2_DP.length ? num1_DP.length : num2_DP.length;
+	let targetIntegerLength = num1IntegerPart.length > num2IntegerPart.length ? num1IntegerPart.length : num2IntegerPart.length;
+	let targetDecimalLength = num1DecimalPart.length > num2DecimalPart.length ? num1DecimalPart.length : num2DecimalPart.length;
 
-	[num1_IP, num1_DP] = makeNumTargetLength(num1_IP, num1_DP, targetIntegerLength, targetDecimalLength);
-	[num2_IP, num2_DP] = makeNumTargetLength(num2_IP, num2_DP, targetIntegerLength, targetDecimalLength);
+	[num1IntegerPart, num1DecimalPart] = padNums(num1IntegerPart, num1DecimalPart, targetIntegerLength, targetDecimalLength);
+	[num2IntegerPart, num2DecimalPart] = padNums(num2IntegerPart, num2DecimalPart, targetIntegerLength, targetDecimalLength);
 
 	if (targetDecimalLength !== 0) {
-		return [num1_IP + '.' + num1_DP, num2_IP + '.' + num2_DP, targetDecimalLength];
+		return [num1IntegerPart + '.' + num1DecimalPart, num2IntegerPart + '.' + num2DecimalPart, targetDecimalLength];
 	}
 
-	return [num1_IP + num1_DP, num2_IP + num2_DP];
+	return [num1IntegerPart + num1DecimalPart, num2IntegerPart + num2DecimalPart, targetDecimalLength];
 }

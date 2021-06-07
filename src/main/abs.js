@@ -1,14 +1,13 @@
 import {deleteUnnecessaryZeros, sign} from "../helpers/helpers.js";
+import {ifValidNum} from "../checkers/checkers.js";
 
-export function absWithoutFormatting(num) {
-	if (sign(num) === -1) return num.slice(1);
-
-	return num;
+export function absUnsafe(num) {
+	return sign(num) === -1 ? num.slice(1) : num;
 }
 
 export default function abs(num) {
 
-	num = deleteUnnecessaryZeros(num);
+	ifValidNum(num);
 
-	return absWithoutFormatting(num);
+	return absUnsafe(deleteUnnecessaryZeros(num));
 }
