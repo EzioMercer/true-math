@@ -8,8 +8,9 @@ node_modules
 babel.config.json
 webpack.config.js
 
-#TEST
+#TESTS
 test
+test.js
 
 #PACKAGE.JSON HELPERS
 devPackage.json

@@ -8,11 +8,12 @@ export function subtract2nums(num1, num2) {
 }
 
 export function subtractUnsafe(nums) {
+
 	for (let num = 1; num < nums.length; ++num) {
 		nums[num] = changeSign(nums[num]);
 	}
 
-	return sumUnsafe(nums.map(num => deleteUnnecessaryZeros(num)));
+	return sumUnsafe(nums);
 }
 
 export default function subtract(nums) {
@@ -20,5 +21,5 @@ export default function subtract(nums) {
 	ifArray(nums);
 	ifValidNums(nums);
 
-	return subtractUnsafe(nums)
+	return subtractUnsafe(nums.map(num => deleteUnnecessaryZeros(num)))
 }

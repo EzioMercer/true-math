@@ -6,6 +6,8 @@ import {
 } from '../helpers/helpers.js';
 import {abs} from "../true-math.js";
 import {compareUnsafe} from "./compare.js";
+import {absUnsafe} from "./abs.js";
+import {signUnsafe} from "../helpers/sign.js";
 
 function sumDigits(digit1, digit2, sum, memory, multiplier) {
 
@@ -24,10 +26,10 @@ function sumDigits(digit1, digit2, sum, memory, multiplier) {
 
 export function sum2nums(num1, num2) {
 
-	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(abs(num1), abs(num2));
+	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(absUnsafe(num1), absUnsafe(num2));
 	let needMinus = false;
 	let sum = '';
-	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
+	const [num1Sign, num2Sign] = [signUnsafe(num1), signUnsafe(num2)];
 	const [num1IsNegative, num2IsNegative] = [num1Sign === -1, num2Sign === -1];
 	const isSecondBigger = compareUnsafe(absNum1, absNum2) === -1;
 	let multiplier = num1Sign * num2Sign || num1Sign || num2Sign;
@@ -57,9 +59,10 @@ export function sum2nums(num1, num2) {
 		[sum, memory] = sumDigits((+absNum1[digit]), (+absNum2[digit]), sum, memory, multiplier);
 	}
 
+	if (memory === 1) sum = '1' + sum;
+
 	sum = deleteUnnecessaryZeros(sum);
 
-	if (memory === 1) sum = '1' + sum;
 	if (needMinus && sum !== '0') sum = '-' + sum;
 
 	return sum;

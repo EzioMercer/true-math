@@ -3,6 +3,7 @@ import {subtract, sum} from '../src/true-math.js';
 
 //TEST DATASET ITEM IS [NUM1, NUM2, SUM, SUBTRACT];
 const testDataset = [
+	['9', '99', '108', '-90'],
 	['9', '1', '10', '8'],
 	['9', '-1', '8', '10'],
 	['-9', '1', '-8', '-10'],
