@@ -57,9 +57,10 @@ export function sum2nums(num1, num2) {
 		[sum, memory] = sumDigits((+absNum1[digit]), (+absNum2[digit]), sum, memory, multiplier);
 	}
 
+	if (memory === 1) sum = '1' + sum;
+
 	sum = deleteUnnecessaryZeros(sum);
 
-	if (memory === 1) sum = '1' + sum;
 	if (needMinus && sum !== '0') sum = '-' + sum;
 
 	return sum;
