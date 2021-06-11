@@ -11,7 +11,7 @@ function product2nums(num1, num2) {
 
 	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
 
-	if (num1Sign === 0 || num2Sign === 0) return '0'; 
+	if (num1Sign === 0 || num2Sign === 0) return '0';
 
 	// console.log(num1, num2);
 	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(absUnsafe(num1), absUnsafe(num2));
