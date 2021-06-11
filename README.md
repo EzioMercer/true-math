@@ -26,7 +26,7 @@ Import `{needFuntions}` from `true-math` in the file test.js
 import {sum, subtract, ...} from 'true-math';
 ```
 
-then call available functions like shown below:
+then call them like shown below:
 
 ```
 const testData = ['0.1001', '0.0002'];

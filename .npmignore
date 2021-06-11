@@ -7,3 +7,10 @@ node_modules
 #SETTINGS
 babel.config.json
 webpack.config.js
+
+#TEST
+test
+
+#PACKAGE.JSON HELPERS
+devPackage.json
+pubPackage.json
