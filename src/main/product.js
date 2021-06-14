@@ -5,41 +5,72 @@ import {sum2nums, sumUnsafe} from "./sum.js";
 import {subtractUnsafe} from "./subtract.js";
 import {absUnsafe} from "./abs.js";
 
-function product2nums(num1, num2) {
+const calculatedProducts = new Map();
 
-	if (num1.length === 1 && num2.length === 1) return '' + (+num1) * (+num2);
+function karatsubaMethod(absNum1, absNum2) {
+
+	if (absNum1.length === 1 && absNum2.length === 1) {
+		return '' + (+absNum1) * (+absNum2);
+	}
+
+	[absNum1, absNum2] = makeNumsSameLength(absNum1, absNum2);
+
+	if (calculatedProducts.has(absNum1)) {
+		if (calculatedProducts.get(absNum1).has(absNum2)) {
+			return calculatedProducts.get(absNum1).get(absNum2);
+		} else {
+			calculatedProducts.set(absNum2, new Map([[absNum1, null]]));
+		}
+	} else {
+		calculatedProducts.set(absNum1, new Map([[absNum2, null]]));
+		calculatedProducts.set(absNum2, new Map([[absNum1, null]]));
+	}
+
+	const lengthHalf = Math.floor(absNum1.length / 2);
+	const [a, b] = [absNum1.slice(0, lengthHalf), absNum1.slice(lengthHalf)];
+	const [c, d] = [absNum2.slice(0, lengthHalf), absNum2.slice(lengthHalf)];
+	const ac = karatsubaMethod(a, c);
+	const bd = karatsubaMethod(b, d);
+	const a_b = sum2nums(a, b);
+	const c_d = sum2nums(c, d);
+	const bc_ad = subtractUnsafe([karatsubaMethod(a_b, c_d), ac, bd]);
+	const z = b.length;
+	const z2 = z * 2;
+	const product = sumUnsafe([ac.padEnd(ac.length + z2, '0'), bc_ad.padEnd(bc_ad.length + z, '0'), bd]);
+
+	calculatedProducts.get(absNum1).set(absNum2, product);
+	calculatedProducts.get(absNum2).set(absNum1, product);
+
+	return product;
+}
+
+function product2nums(num1, num2) {
 
 	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
 
 	if (num1Sign === 0 || num2Sign === 0) return '0';
 
-	// console.log(num1, num2);
 	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(absUnsafe(num1), absUnsafe(num2));
-	// console.log(absNum1, absNum2);
 	const needMinus = num1Sign * num2Sign === -1;
 	const [absNum1Split, absNum2Split] = [split(absNum1), split(absNum2)];
 	[absNum1, absNum2] = [absNum1Split[0] + absNum1Split[1], absNum2Split[0] + absNum2Split[1]];
-	const lengthHalf = Math.floor(absNum1.length / 2);
-	let [a, b] = [absNum1.slice(0, lengthHalf), absNum1.slice(lengthHalf)];
-	let [c, d] = [absNum2.slice(0, lengthHalf), absNum2.slice(lengthHalf)];
 
-	// console.log(a, b, c, d);
+	let product = karatsubaMethod(absNum1, absNum2);
 
-	let ac = product2nums(a, c);
-	let bd = product2nums(b, d);
-	let a_b = sum2nums(a, b);
-	let c_d = sum2nums(c, d);
-	// console.log(a_b, c_d, ac, bd);
-	let bc_ad = subtractUnsafe([product2nums(a_b, c_d), ac, bd]);
-	let z = b.length;
-	let z2 = z * 2;
+	if (decimalPartLength !== 0) {
 
-	// console.log(ac, bd, a_b, c_d, bc_ad, z, z2, [ac.padEnd(ac.length + z2, '0'), bc_ad.padEnd(bc_ad.length + z, '0'), bd]);
+		const dotPosition = product.length - decimalPartLength * 2;
 
-	if (needMinus) return '-' + sumUnsafe([ac.padEnd(ac.length + z2, '0'), bc_ad.padEnd(bc_ad.length + z, '0'), bd]);
+		product = product.slice(0, dotPosition) + '.' + product.slice(dotPosition);
 
-	return sumUnsafe([ac.padEnd(ac.length + z2, '0'), bc_ad.padEnd(bc_ad.length + z, '0'), bd]);
+		if (dotPosition === 0) product = '0' + product;
 
+		product = deleteUnnecessaryZeros(product);
+	}
+
+	if (needMinus) return '-' + product;
+
+	return product;
 }
 
 function productUnsafe(nums) {
