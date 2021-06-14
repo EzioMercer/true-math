@@ -5,7 +5,7 @@ import {sum2nums, sumUnsafe} from "./sum.js";
 import {subtractUnsafe} from "./subtract.js";
 import {absUnsafe} from "./abs.js";
 
-const calculatedProducts = new Map();
+const cachedProducts = new Map();
 
 function karatsubaMethod(absNum1, absNum2) {
 
@@ -15,16 +15,16 @@ function karatsubaMethod(absNum1, absNum2) {
 
 	[absNum1, absNum2] = makeNumsSameLength(absNum1, absNum2);
 
-	if (calculatedProducts.has(absNum1)) {
-		if (calculatedProducts.get(absNum1).has(absNum2)) {
-			return calculatedProducts.get(absNum1).get(absNum2);
-		} else {
-			calculatedProducts.set(absNum2, new Map([[absNum1, null]]));
+	if (cachedProducts.has(absNum1)) {
+		if (cachedProducts.get(absNum1).has(absNum2)) {
+			return cachedProducts.get(absNum1).get(absNum2);
 		}
+
 	} else {
-		calculatedProducts.set(absNum1, new Map([[absNum2, null]]));
-		calculatedProducts.set(absNum2, new Map([[absNum1, null]]));
+		cachedProducts.set(absNum1, new Map([[absNum2, null]]));
 	}
+
+	cachedProducts.set(absNum2, new Map([[absNum1, null]]));
 
 	const lengthHalf = Math.floor(absNum1.length / 2);
 	const [a, b] = [absNum1.slice(0, lengthHalf), absNum1.slice(lengthHalf)];
@@ -38,8 +38,8 @@ function karatsubaMethod(absNum1, absNum2) {
 	const z2 = z * 2;
 	const product = sumUnsafe([ac.padEnd(ac.length + z2, '0'), bc_ad.padEnd(bc_ad.length + z, '0'), bd]);
 
-	calculatedProducts.get(absNum1).set(absNum2, product);
-	calculatedProducts.get(absNum2).set(absNum1, product);
+	cachedProducts.get(absNum1).set(absNum2, product);
+	cachedProducts.get(absNum2).set(absNum1, product);
 
 	return product;
 }

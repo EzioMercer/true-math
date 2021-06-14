@@ -17,6 +17,7 @@ Available functions:
 * floor(string): string
 * subtraction ([string]): string
 * sum ([string]): string
+* product ([string]): string
 
 ## Example
 
