@@ -3,11 +3,11 @@ import changeSign from "../helpers/changeSign.js";
 import {sum2nums, sumUnsafe} from "./sum.js";
 import {deleteUnnecessaryZeros} from "../helpers/helpers.js";
 
-export function subtract2nums(num1, num2) {
+export function difference2nums(num1, num2) {
 	return sum2nums(num1, changeSign(num2));
 }
 
-export function subtractUnsafe(nums) {
+export function differenceUnsafe(nums) {
 
 	for (let num = 1; num < nums.length; ++num) {
 		nums[num] = changeSign(nums[num]);
@@ -16,10 +16,10 @@ export function subtractUnsafe(nums) {
 	return sumUnsafe(nums);
 }
 
-export default function subtract(nums) {
+export default function difference(nums) {
 
 	ifArray(nums);
 	ifValidNums(nums);
 
-	return subtractUnsafe(nums.map(num => deleteUnnecessaryZeros(num)))
+	return differenceUnsafe(nums.map(num => deleteUnnecessaryZeros(num)))
 }

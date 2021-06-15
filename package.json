@@ -1,6 +1,6 @@
 {
   "name": "true-math",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "True Math - math library for numbers of arbitrary length",
   "main": "./src/true-math.js",
   "scripts": {
@@ -18,7 +18,11 @@
     "calculation",
     "correct",
     "numbers",
-    "arbitrary length"
+    "arbitrary length",
+    "sum",
+    "difference",
+    "product",
+    "quotient"
   ],
   "author": "Rovshan Badirkhanov",
   "license": "GPL-3.0-only",

@@ -1,5 +1,5 @@
 import abs from "./main/abs.js";
-import subtract from './main/subtract.js';
+import difference from './main/difference.js';
 import sum from './main/sum.js';
 import compare from "./main/compare.js";
 import floor from "./main/floor.js";
@@ -8,7 +8,7 @@ import product from "./main/product.js";
 
 export {
 	abs,
-	subtract,
+	difference,
 	sum,
 	compare,
 	floor,

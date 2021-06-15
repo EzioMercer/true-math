@@ -2,7 +2,7 @@ import {ifValidNums} from "../checkers/checkers.js";
 import ifArray from "../checkers/ifArray.js";
 import {deleteUnnecessaryZeros, makeNumsSameLength, sign, split} from "../helpers/helpers.js";
 import {sum2nums, sumUnsafe} from "./sum.js";
-import {subtractUnsafe} from "./subtract.js";
+import {differenceUnsafe} from "./difference.js";
 import {absUnsafe} from "./abs.js";
 
 const cachedProducts = new Map();
@@ -33,7 +33,7 @@ function karatsubaMethod(absNum1, absNum2) {
 	const bd = karatsubaMethod(b, d);
 	const a_b = sum2nums(a, b);
 	const c_d = sum2nums(c, d);
-	const bc_ad = subtractUnsafe([karatsubaMethod(a_b, c_d), ac, bd]);
+	const bc_ad = differenceUnsafe([karatsubaMethod(a_b, c_d), ac, bd]);
 	const z = b.length;
 	const z2 = z * 2;
 	const product = sumUnsafe([ac.padEnd(ac.length + z2, '0'), bc_ad.padEnd(bc_ad.length + z, '0'), bd]);

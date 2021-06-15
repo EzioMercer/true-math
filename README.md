@@ -14,10 +14,10 @@ Available functions:
 * abs(string): string
 * ceil(string): string
 * compare(string, string): number
+* difference ([string]): string
 * floor(string): string
-* subtraction ([string]): string
-* sum ([string]): string
 * product ([string]): string
+* sum ([string]): string
 
 ## Example
 

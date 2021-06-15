@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {subtract, sum} from '../src/true-math.js';
+import {difference, sum} from '../src/true-math.js';
 
 //TEST DATASET ITEM IS [NUM1, NUM2, SUM, SUBTRACT];
 const testDataset = [
@@ -33,7 +33,7 @@ describe('SUM', () => {
 describe('SUBTRACT', () => {
 	for (let testData of testDataset) {
 		it(`${testData[0]} - ${testData[1]} = ${testData[3]}`, () => {
-			assert.strictEqual(subtract(testData.slice(0, 2)), testData[3]);
+			assert.strictEqual(difference(testData.slice(0, 2)), testData[3]);
 		})
 	}
 });
