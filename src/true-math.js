@@ -7,7 +7,6 @@ import ceil from "./main/ceil.js";
 import product from "./main/product.js";
 import quotient from "./main/quotient.js";
 
-
 export {
 	abs,
 	difference,
