@@ -5,6 +5,7 @@ import compare from "./main/compare.js";
 import floor from "./main/floor.js";
 import ceil from "./main/ceil.js";
 import product from "./main/product.js";
+import quotient from "./main/quotient.js";
 
 export {
 	abs,
@@ -13,5 +14,6 @@ export {
 	compare,
 	floor,
 	ceil,
-	product
+	product,
+	quotient
 };

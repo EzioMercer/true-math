@@ -10,7 +10,7 @@ const cachedProducts = new Map();
 function karatsubaMethod(absNum1, absNum2) {
 
 	if (absNum1.length === 1 && absNum2.length === 1) {
-		return '' + (+absNum1) * (+absNum2);
+		return '' + (absNum1 * absNum2);
 	}
 
 	[absNum1, absNum2] = makeNumsSameLength(absNum1, absNum2);
@@ -19,7 +19,6 @@ function karatsubaMethod(absNum1, absNum2) {
 		if (cachedProducts.get(absNum1).has(absNum2)) {
 			return cachedProducts.get(absNum1).get(absNum2);
 		}
-
 	} else {
 		cachedProducts.set(absNum1, new Map([[absNum2, null]]));
 	}
