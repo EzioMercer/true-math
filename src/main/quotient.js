@@ -17,10 +17,11 @@ export function quotientUnsafe(nums) {
 
 	let quotient = nums[0];
 
-	for (let num = 1; num < nums.length; ++num) {
+	for (let i = 1; i < nums.length; ++i) {
+		const num = nums[i];
 
 		if (quotient === '0') {
-			if (nums[num] === '0') {
+			if (num === '0') {
 				quotient = 'NaN';
 				break;
 			}
@@ -28,13 +29,13 @@ export function quotientUnsafe(nums) {
 			continue;
 		}
 
-		if (nums[num] === '0') {
+		if (num === '0') {
 			quotient = signUnsafe(quotient) === 1 ? '' : '-';
 			quotient += 'Infinity';
 			break;
 		}
 
-		quotient = quotient2nums(quotient, nums[num]);
+		quotient = quotient2nums(quotient, num);
 	}
 
 	return quotient;
