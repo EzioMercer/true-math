@@ -1,12 +1,47 @@
 import ifValidArray from "../checkers/ifValidArray.js";
-import {normalizeNumber, sign} from "../helpers/helpers.js";
+import {normalizeNumber} from "../helpers/helpers.js";
 import {signUnsafe} from "../helpers/sign.js";
+import {difference2nums} from "./difference.js";
+import {absUnsafe} from "./abs.js";
+import {sum2nums} from "./sum.js";
+import {product2nums} from "./product.js";
 
 function quotient2nums(num1, num2) {
 
-	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
+	const [num1Sign, num2Sign] = [signUnsafe(num1), signUnsafe(num2)];
+	const needMinus = num1Sign * num2Sign === -1;
 
-	return [num1, num2];
+	[num1, num2] = [absUnsafe(num1), absUnsafe(num2)];
+
+	let limit = 8;
+	let quotientNextNumber = '0';
+	let quotient;
+
+	while (true) {
+		let num1Prev = num1;
+
+		while (signUnsafe(num1) === 1) {
+			num1Prev = num1;
+			num1 = difference2nums(num1, num2);
+
+			quotientNextNumber = sum2nums(quotientNextNumber, '1');
+		}
+
+		if (signUnsafe(num1) === 0) {
+			quotient = quotientNextNumber;
+			break;
+		}
+
+		if (signUnsafe(num1) === -1) {
+			quotientNextNumber = difference2nums(quotientNextNumber, '1');
+			num1 = product2nums(num1Prev, '10');
+		}
+
+	}
+
+	if (needMinus) return '-' + quotient;
+
+	return quotient;
 }
 
 export function quotientUnsafe(nums) {

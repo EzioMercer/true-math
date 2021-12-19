@@ -3,6 +3,7 @@ import {makeNumsSameLength, normalizeNumber, sign, split} from "../helpers/helpe
 import {sum2nums, sumUnsafe} from "./sum.js";
 import {differenceUnsafe} from "./difference.js";
 import {absUnsafe} from "./abs.js";
+import {signUnsafe} from "../helpers/sign.js";
 
 const cachedProducts = new Map();
 
@@ -42,11 +43,9 @@ function karatsubaMethod(absNum1, absNum2) {
 	return product;
 }
 
-function product2nums(num1, num2) {
+export function product2nums(num1, num2) {
 
-	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
-
-	if (num1Sign === 0 || num2Sign === 0) return '0';
+	const [num1Sign, num2Sign] = [signUnsafe(num1), signUnsafe(num2)];
 
 	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(absUnsafe(num1), absUnsafe(num2));
 	const needMinus = num1Sign * num2Sign === -1;
@@ -79,6 +78,9 @@ function productUnsafe(nums) {
 	let product = nums[0];
 
 	for (let num = 1; num < nums.length; ++num) {
+
+		if (product === '0' || nums[num] === '0') return '0';
+
 		product = product2nums(product, nums[num]);
 	}
 

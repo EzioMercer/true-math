@@ -1,4 +1,4 @@
-import {product, sum} from './src/true-math.js';
+import {product, quotient, sum} from './src/true-math.js';
 import {sign} from "./src/helpers/helpers.js";
 
-console.log(sign('0-0'));
+console.log(quotient(['7', '2']));
