@@ -15,28 +15,24 @@ function quotient2nums(num1, num2) {
 
 	let limit = 8;
 	let quotientNextNumber = '0';
-	let quotient;
+	let quotient = '';
+	let num1Prev = num1;
 
 	while (true) {
-		let num1Prev = num1;
-
 		while (signUnsafe(num1) === 1) {
 			num1Prev = num1;
 			num1 = difference2nums(num1, num2);
-
 			quotientNextNumber = sum2nums(quotientNextNumber, '1');
 		}
 
-		if (signUnsafe(num1) === 0) {
-			quotient = quotientNextNumber;
-			break;
-		}
+		quotient += quotientNextNumber;
 
-		if (signUnsafe(num1) === -1) {
-			quotientNextNumber = difference2nums(quotientNextNumber, '1');
+		if (signUnsafe(num1) === 0) {
+			break;
+		} else {
+			quotientNextNumber = '0';
 			num1 = product2nums(num1Prev, '10');
 		}
-
 	}
 
 	if (needMinus) return '-' + quotient;
