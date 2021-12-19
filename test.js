@@ -1,4 +1,4 @@
-import {quotient, sum} from './src/true-math.js';
-import deleteUnnecessaryZeros from "./src/helpers/deleteUnnecessaryZeros.js";
+import {product, sum} from './src/true-math.js';
+import {sign} from "./src/helpers/helpers.js";
 
-console.log(sum(['-0.0', '-0.0']));
+console.log(sign('0-0'));

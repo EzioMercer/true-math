@@ -1,4 +1,4 @@
-import {sign, makeNumsSameLength, deleteUnnecessaryZeros} from "../helpers/helpers.js";
+import {makeNumsSameLength, normalizeNumber, sign} from "../helpers/helpers.js";
 import {abs} from "../true-math.js";
 import {ifValidNums} from "../checkers/checkers.js";
 
@@ -16,7 +16,7 @@ export default function compare(num1, num2) {
 
 	ifValidNums([num1, num2]);
 
-	[num1, num2] = [deleteUnnecessaryZeros(num1), deleteUnnecessaryZeros(num2)];
+	[num1, num2] = [normalizeNumber(num1), normalizeNumber(num2)];
 
 	const [num1IsNegative, num2IsNegative] = [sign(num1) === -1, sign(num2) === -1];
 

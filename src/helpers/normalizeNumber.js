@@ -1,6 +1,6 @@
 import {signUnsafe} from "./sign.js";
 
-export default function deleteUnnecessaryZeros(num) {
+export default function normalizeNumber(num) {
 
 	const needMinus = signUnsafe(num) === -1;
 
@@ -22,7 +22,9 @@ export default function deleteUnnecessaryZeros(num) {
 		else break;
 	}
 
-	if (needMinus) return '-' + num.slice(startZerosCount, endZerosCount);
+	const croppedNumber = num.slice(startZerosCount, endZerosCount);
 
-	return num.slice(startZerosCount, endZerosCount);
+	if (needMinus && croppedNumber !== '0') return '-' + croppedNumber;
+
+	return croppedNumber;
 }

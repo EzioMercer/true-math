@@ -1,6 +1,5 @@
-import ifArray from "../checkers/ifArray.js";
-import {ifValidNums} from "../checkers/checkers.js";
-import {deleteUnnecessaryZeros, sign} from "../helpers/helpers.js";
+import ifValidArray from "../checkers/ifValidArray.js";
+import {normalizeNumber, sign} from "../helpers/helpers.js";
 import {signUnsafe} from "../helpers/sign.js";
 
 function quotient2nums(num1, num2) {
@@ -42,8 +41,8 @@ export function quotientUnsafe(nums) {
 }
 
 export default function quotient(nums) {
-	ifArray(nums);
-	ifValidNums(nums);
 
-	return quotientUnsafe(nums.map(num => deleteUnnecessaryZeros(num)));
+	ifValidArray(nums);
+
+	return quotientUnsafe(nums.map(num => normalizeNumber(num)));
 }

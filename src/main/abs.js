@@ -1,4 +1,4 @@
-import {deleteUnnecessaryZeros, sign} from "../helpers/helpers.js";
+import {normalizeNumber, sign} from "../helpers/helpers.js";
 import {ifValidNum} from "../checkers/checkers.js";
 
 export function absUnsafe(num) {
@@ -9,5 +9,5 @@ export default function abs(num) {
 
 	ifValidNum(num);
 
-	return absUnsafe(deleteUnnecessaryZeros(num));
+	return absUnsafe(normalizeNumber(num));
 }

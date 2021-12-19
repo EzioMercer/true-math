@@ -1,10 +1,5 @@
-import {ifArray, ifValidNums} from '../checkers/checkers.js';
-import {
-	makeNumsSameLength,
-	deleteUnnecessaryZeros,
-	sign
-} from '../helpers/helpers.js';
-import {abs} from "../true-math.js";
+import {ifValidArray} from '../checkers/checkers.js';
+import {makeNumsSameLength, normalizeNumber} from '../helpers/helpers.js';
 import {compareUnsafe} from "./compare.js";
 import {absUnsafe} from "./abs.js";
 import {signUnsafe} from "../helpers/sign.js";
@@ -61,7 +56,7 @@ export function sum2nums(num1, num2) {
 
 	if (memory === 1) sum = '1' + sum;
 
-	sum = deleteUnnecessaryZeros(sum);
+	sum = normalizeNumber(sum);
 
 	if (needMinus && sum !== '0') sum = '-' + sum;
 
@@ -84,8 +79,7 @@ export function sumUnsafe(nums) {
 
 export default function sum(nums) {
 
-	ifArray(nums);
-	ifValidNums(nums);
+	ifValidArray(nums);
 
-	return sumUnsafe(nums.map(num => deleteUnnecessaryZeros(num)))
+	return sumUnsafe(nums.map(num => normalizeNumber(num)))
 }

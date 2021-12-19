@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {product, quotient} from '../src/true-math.js';
+import {product} from '../src/true-math.js';
 
 //TEST DATASET ITEM IS [NUM1, NUM2, PRODUCT, QUOTIENT];
 const testDataset = [
@@ -20,10 +20,10 @@ describe('PRODUCT', () => {
 	}
 });
 
-describe('QUOTIENT', () => {
+/*describe('QUOTIENT', () => {
 	for (let testData of testDataset) {
 		it(`${testData[0]} * ${testData[1]} = ${testData[2]}`, () => {
 			assert.strictEqual(quotient(testData.slice(0, 2)), testData[2]);
 		})
 	}
-});
+});*/

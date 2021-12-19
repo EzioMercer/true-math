@@ -1,6 +1,5 @@
-import {ifValidNums} from "../checkers/checkers.js";
-import ifArray from "../checkers/ifArray.js";
-import {deleteUnnecessaryZeros, makeNumsSameLength, sign, split} from "../helpers/helpers.js";
+import ifValidArray from "../checkers/ifValidArray.js";
+import {makeNumsSameLength, normalizeNumber, sign, split} from "../helpers/helpers.js";
 import {sum2nums, sumUnsafe} from "./sum.js";
 import {differenceUnsafe} from "./difference.js";
 import {absUnsafe} from "./abs.js";
@@ -64,7 +63,7 @@ function product2nums(num1, num2) {
 
 		if (dotPosition === 0) product = '0' + product;
 
-		product = deleteUnnecessaryZeros(product);
+		product = normalizeNumber(product);
 	}
 
 	if (needMinus) return '-' + product;
@@ -87,8 +86,8 @@ function productUnsafe(nums) {
 }
 
 export default function product(nums) {
-	ifArray(nums);
-	ifValidNums(nums);
 
-	return productUnsafe(nums.map(num => deleteUnnecessaryZeros(num)));
+	ifValidArray(nums);
+
+	return productUnsafe(nums.map(num => normalizeNumber(num)));
 }
