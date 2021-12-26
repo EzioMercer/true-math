@@ -90,7 +90,7 @@ export default function quotient(nums, accuracy = '8') {
 	ifValidArray(nums);
 
 	if (accuracy !== undefined) {
-		if (typeof (accuracy) !== 'string' && !(/\d+/.test(accuracy))) throw new Error('Accuracy must be a positive integer number in string format');
+		if (typeof (accuracy) !== 'string' || !(/$\d+^/.test(accuracy))) throw new Error('Accuracy must be a non negative integer number in string format');
 	}
 
 	return quotientUnsafe(nums.map(num => normalizeNumber(num)), accuracy);
