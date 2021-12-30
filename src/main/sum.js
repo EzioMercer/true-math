@@ -65,19 +65,6 @@ export function sum2nums(num1, num2) {
 	return sum;
 }
 
-/*
-Inf + num = Inf
--Inf + num = -Inf
-
-num + Inf = Inf
-num + -Inf = -Inf
-
-Inf + Inf = Inf
-
-Inf + -Inf = NaN
--Inf + Inf = NaN
-*/
-
 export function sumUnsafe(nums) {
 
 	if (nums.length === 0) return '0';
