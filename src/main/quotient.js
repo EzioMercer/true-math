@@ -5,6 +5,7 @@ import {difference2nums} from "./difference.js";
 import {absUnsafe} from "./abs.js";
 import {sum2nums} from "./sum.js";
 import {product2nums} from "./product.js";
+import {checkNumsValue} from "../checkers/checkers.js";
 
 function quotient2nums(num1, num2, accuracy) {
 
@@ -90,8 +91,15 @@ export default function quotient(nums, accuracy = '8') {
 	ifValidArray(nums);
 
 	if (accuracy !== undefined) {
-		if (typeof (accuracy) !== 'string' || !(/$\d+^/.test(accuracy))) throw new Error('Accuracy must be a non negative integer number in string format');
+		if (typeof (accuracy) !== 'string') throw new Error('Accuracy must be a string');
+		if (!(/^\d+$/.test(accuracy))) throw new Error('Accuracy must be a non negative integer number');
 	}
 
-	return quotientUnsafe(nums.map(num => normalizeNumber(num)), accuracy);
+	nums.map(num => normalizeNumber(num));
+
+	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '*');
+
+	if (hasSpecificValue) return returnValue;
+
+	return quotientUnsafe(nums, accuracy);
 }

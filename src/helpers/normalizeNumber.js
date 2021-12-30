@@ -2,6 +2,12 @@ import {signUnsafe} from "./sign.js";
 
 export default function normalizeNumber(num) {
 
+	if (
+		num === 'NaN' ||
+		num === 'Infinity' ||
+		num === '-Infinity'
+	) return num;
+
 	const needMinus = signUnsafe(num) === -1;
 
 	if (needMinus) num = num.slice(1);

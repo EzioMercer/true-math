@@ -1,4 +1,3 @@
-import {product, quotient, sum} from './src/true-math.js';
-import {sign} from "./src/helpers/helpers.js";
+import {abs, difference, product, quotient, sum} from './src/true-math.js';
 
-console.log(quotient(['1', '3'], '-1'));
+console.log(abs('-Infinity'));

@@ -4,6 +4,7 @@ import {sum2nums, sumUnsafe} from "./sum.js";
 import {differenceUnsafe} from "./difference.js";
 import {absUnsafe} from "./abs.js";
 import {signUnsafe} from "../helpers/sign.js";
+import {checkNumsValue} from "../checkers/checkers.js";
 
 const cachedProducts = new Map();
 
@@ -77,11 +78,12 @@ function productUnsafe(nums) {
 
 	let product = nums[0];
 
-	for (let num = 1; num < nums.length; ++num) {
+	for (let i = 1; i < nums.length; ++i) {
+		const num = nums[i];
 
-		if (product === '0' || nums[num] === '0') return '0';
+		if (product === '0' || num === '0') return '0';
 
-		product = product2nums(product, nums[num]);
+		product = product2nums(product, num);
 	}
 
 	return product;
@@ -91,5 +93,11 @@ export default function product(nums) {
 
 	ifValidArray(nums);
 
-	return productUnsafe(nums.map(num => normalizeNumber(num)));
+	nums = nums.map(num => normalizeNumber(num));
+
+	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '*');
+
+	if (hasSpecificValue) return returnValue;
+
+	return productUnsafe(nums);
 }

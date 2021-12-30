@@ -1,8 +1,10 @@
-import {ifValidArray} from '../checkers/checkers.js';
+import {checkNumsValue, ifValidArray, isInfinite, isNaNum} from '../checkers/checkers.js';
 import {makeNumsSameLength, normalizeNumber} from '../helpers/helpers.js';
 import {compareUnsafe} from "./compare.js";
 import {absUnsafe} from "./abs.js";
 import {signUnsafe} from "../helpers/sign.js";
+import isPositiveInfinite from "../checkers/specificValue/isPositiveInfinite.js";
+import isNegativeInfinite from "../checkers/specificValue/isNegativeInfinite.js";
 
 function sumDigits(digit1, digit2, sum, memory, multiplier) {
 
@@ -63,6 +65,19 @@ export function sum2nums(num1, num2) {
 	return sum;
 }
 
+/*
+Inf + num = Inf
+-Inf + num = -Inf
+
+num + Inf = Inf
+num + -Inf = -Inf
+
+Inf + Inf = Inf
+
+Inf + -Inf = NaN
+-Inf + Inf = NaN
+*/
+
 export function sumUnsafe(nums) {
 
 	if (nums.length === 0) return '0';
@@ -70,8 +85,8 @@ export function sumUnsafe(nums) {
 
 	let sum = nums[0];
 
-	for (let num = 1; num < nums.length; ++num) {
-		sum = sum2nums(sum, nums[num]);
+	for (let i = 1; i < nums.length; ++i) {
+		sum = sum2nums(sum, nums[i]);
 	}
 
 	return sum;
@@ -81,5 +96,11 @@ export default function sum(nums) {
 
 	ifValidArray(nums);
 
-	return sumUnsafe(nums.map(num => normalizeNumber(num)))
+	nums = nums.map(num => normalizeNumber(num));
+
+	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '+');
+
+	if (hasSpecificValue) return returnValue;
+
+	return sumUnsafe(nums);
 }
