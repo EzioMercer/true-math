@@ -1,13 +1,10 @@
-import {ifArray, ifValidNums} from '../checkers/checkers.js';
-import {
-	makeNumsSameLength,
-	deleteUnnecessaryZeros,
-	sign
-} from '../helpers/helpers.js';
-import {abs} from "../true-math.js";
+import {checkNumsValue, ifValidArray, isInfinite, isNaNum} from '../checkers/checkers.js';
+import {makeNumsSameLength, normalizeNumber} from '../helpers/helpers.js';
 import {compareUnsafe} from "./compare.js";
 import {absUnsafe} from "./abs.js";
 import {signUnsafe} from "../helpers/sign.js";
+import isPositiveInfinite from "../checkers/specificValue/isPositiveInfinite.js";
+import isNegativeInfinite from "../checkers/specificValue/isNegativeInfinite.js";
 
 function sumDigits(digit1, digit2, sum, memory, multiplier) {
 
@@ -61,7 +58,7 @@ export function sum2nums(num1, num2) {
 
 	if (memory === 1) sum = '1' + sum;
 
-	sum = deleteUnnecessaryZeros(sum);
+	sum = normalizeNumber(sum);
 
 	if (needMinus && sum !== '0') sum = '-' + sum;
 
@@ -75,8 +72,8 @@ export function sumUnsafe(nums) {
 
 	let sum = nums[0];
 
-	for (let num = 1; num < nums.length; ++num) {
-		sum = sum2nums(sum, nums[num]);
+	for (let i = 1; i < nums.length; ++i) {
+		sum = sum2nums(sum, nums[i]);
 	}
 
 	return sum;
@@ -84,8 +81,13 @@ export function sumUnsafe(nums) {
 
 export default function sum(nums) {
 
-	ifArray(nums);
-	ifValidNums(nums);
+	ifValidArray(nums);
 
-	return sumUnsafe(nums.map(num => deleteUnnecessaryZeros(num)))
+	nums = nums.map(num => normalizeNumber(num));
+
+	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '+');
+
+	if (hasSpecificValue) return returnValue;
+
+	return sumUnsafe(nums);
 }

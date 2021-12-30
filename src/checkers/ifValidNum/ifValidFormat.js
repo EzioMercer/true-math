@@ -1,5 +1,5 @@
 export default function ifValidFormat(num) {
-	const regexp = /(^-?)(\d+)(\.\d+)?$/;
+	const regexp = /(^-?)(\d+)(\.\d+)?$|NaN|Infinity/;
 
-	if (!regexp.test(num)) throw new Error('Number can contain only digits, dot and minus. Must start with minus or digit and end with digit');
+	if (!regexp.test(num)) throw new Error('Please enter correct number or NaN or Infinity or -Infinity');
 }

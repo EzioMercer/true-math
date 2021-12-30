@@ -1,16 +1,17 @@
-import {ifValidNums} from "../checkers/checkers.js";
-import ifArray from "../checkers/ifArray.js";
-import {deleteUnnecessaryZeros, makeNumsSameLength, sign, split} from "../helpers/helpers.js";
+import ifValidArray from "../checkers/ifValidArray.js";
+import {makeNumsSameLength, normalizeNumber, sign, split} from "../helpers/helpers.js";
 import {sum2nums, sumUnsafe} from "./sum.js";
 import {differenceUnsafe} from "./difference.js";
 import {absUnsafe} from "./abs.js";
+import {signUnsafe} from "../helpers/sign.js";
+import {checkNumsValue} from "../checkers/checkers.js";
 
 const cachedProducts = new Map();
 
 function karatsubaMethod(absNum1, absNum2) {
 
 	if (absNum1.length === 1 && absNum2.length === 1) {
-		return '' + (+absNum1) * (+absNum2);
+		return '' + (absNum1 * absNum2);
 	}
 
 	[absNum1, absNum2] = makeNumsSameLength(absNum1, absNum2);
@@ -19,7 +20,6 @@ function karatsubaMethod(absNum1, absNum2) {
 		if (cachedProducts.get(absNum1).has(absNum2)) {
 			return cachedProducts.get(absNum1).get(absNum2);
 		}
-
 	} else {
 		cachedProducts.set(absNum1, new Map([[absNum2, null]]));
 	}
@@ -44,11 +44,9 @@ function karatsubaMethod(absNum1, absNum2) {
 	return product;
 }
 
-function product2nums(num1, num2) {
+export function product2nums(num1, num2) {
 
-	const [num1Sign, num2Sign] = [sign(num1), sign(num2)];
-
-	if (num1Sign === 0 || num2Sign === 0) return '0';
+	const [num1Sign, num2Sign] = [signUnsafe(num1), signUnsafe(num2)];
 
 	let [absNum1, absNum2, decimalPartLength] = makeNumsSameLength(absUnsafe(num1), absUnsafe(num2));
 	const needMinus = num1Sign * num2Sign === -1;
@@ -65,7 +63,7 @@ function product2nums(num1, num2) {
 
 		if (dotPosition === 0) product = '0' + product;
 
-		product = deleteUnnecessaryZeros(product);
+		product = normalizeNumber(product);
 	}
 
 	if (needMinus) return '-' + product;
@@ -80,16 +78,26 @@ function productUnsafe(nums) {
 
 	let product = nums[0];
 
-	for (let num = 1; num < nums.length; ++num) {
-		product = product2nums(product, nums[num]);
+	for (let i = 1; i < nums.length; ++i) {
+		const num = nums[i];
+
+		if (product === '0' || num === '0') return '0';
+
+		product = product2nums(product, num);
 	}
 
 	return product;
 }
 
 export default function product(nums) {
-	ifArray(nums);
-	ifValidNums(nums);
 
-	return productUnsafe(nums.map(num => deleteUnnecessaryZeros(num)));
+	ifValidArray(nums);
+
+	nums = nums.map(num => normalizeNumber(num));
+
+	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '*');
+
+	if (hasSpecificValue) return returnValue;
+
+	return productUnsafe(nums);
 }

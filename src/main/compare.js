@@ -1,6 +1,6 @@
-import {sign, makeNumsSameLength, deleteUnnecessaryZeros} from "../helpers/helpers.js";
+import {makeNumsSameLength, normalizeNumber, sign} from "../helpers/helpers.js";
 import {abs} from "../true-math.js";
-import {ifValidNums} from "../checkers/checkers.js";
+import {checkNumsValue, ifValidNums} from "../checkers/checkers.js";
 
 export function compareUnsafe(absNum1, absNum2) {
 
@@ -16,7 +16,11 @@ export default function compare(num1, num2) {
 
 	ifValidNums([num1, num2]);
 
-	[num1, num2] = [deleteUnnecessaryZeros(num1), deleteUnnecessaryZeros(num2)];
+	[num1, num2] = [normalizeNumber(num1), normalizeNumber(num2)];
+
+	const {hasSpecificValue, returnValue} = checkNumsValue([num1, num2], 'compare');
+
+	if (hasSpecificValue) return returnValue;
 
 	const [num1IsNegative, num2IsNegative] = [sign(num1) === -1, sign(num2) === -1];
 

@@ -5,8 +5,8 @@ export default function makeNumsSameLength(num1, num2) {
 	let [num1IntegerPart, num1DecimalPart] = split(num1);
 	let [num2IntegerPart, num2DecimalPart] = split(num2);
 
-	let targetIntegerLength = num1IntegerPart.length > num2IntegerPart.length ? num1IntegerPart.length : num2IntegerPart.length;
-	let targetDecimalLength = num1DecimalPart.length > num2DecimalPart.length ? num1DecimalPart.length : num2DecimalPart.length;
+	const targetIntegerLength = num1IntegerPart.length > num2IntegerPart.length ? num1IntegerPart.length : num2IntegerPart.length;
+	const targetDecimalLength = num1DecimalPart.length > num2DecimalPart.length ? num1DecimalPart.length : num2DecimalPart.length;
 
 	[num1IntegerPart, num1DecimalPart] = padNums(num1IntegerPart, num1DecimalPart, targetIntegerLength, targetDecimalLength);
 	[num2IntegerPart, num2DecimalPart] = padNums(num2IntegerPart, num2DecimalPart, targetIntegerLength, targetDecimalLength);

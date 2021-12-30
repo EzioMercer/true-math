@@ -1,4 +1,4 @@
-import {deleteUnnecessaryZeros} from "./helpers.js";
+import {normalizeNumber} from "./helpers.js";
 
 export function signUnsafe(num) {
 	if (num[0] === '-') return -1;
@@ -8,5 +8,5 @@ export function signUnsafe(num) {
 }
 
 export default function sign(num) {
-	return signUnsafe(deleteUnnecessaryZeros(num));
+	return signUnsafe(normalizeNumber(num));
 }

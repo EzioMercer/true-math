@@ -1,4 +1,3 @@
-import {product, sum} from './src/true-math.js';
-import {deleteUnnecessaryZeros} from "./src/helpers/helpers.js";
+import {abs, difference, product, quotient, sum} from './src/true-math.js';
 
-console.log(product(['564168573218965231', '6459687456574123']));
+console.log(abs('-Infinity'));
