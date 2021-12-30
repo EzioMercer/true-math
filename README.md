@@ -18,6 +18,7 @@ Available functions:
 * floor(string): string
 * product ([string]): string
 * sum ([string]): string
+* quotient ([string]): string
 
 ## Example
 
