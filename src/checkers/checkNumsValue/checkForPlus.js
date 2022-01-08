@@ -9,7 +9,7 @@ export default function checkForPlus(nums, result) {
 
 	for (const num of nums) {
 
-		if (isNaNum(num) || hasInfinity && hasNegativeInfinity) {
+		if (isNaNum(num)) {
 			result.hasSpecificValue = true;
 			result.returnValue = NAN;
 			return;
@@ -19,6 +19,12 @@ export default function checkForPlus(nums, result) {
 		} else if (isNegativeInfinite(num)) {
 			result.hasSpecificValue = true;
 			hasNegativeInfinity = true;
+		}
+
+		if (hasInfinity && hasNegativeInfinity) {
+			result.hasSpecificValue = true;
+			result.returnValue = NAN;
+			return;
 		}
 	}
 

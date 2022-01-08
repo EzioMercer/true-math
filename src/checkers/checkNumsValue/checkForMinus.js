@@ -17,11 +17,11 @@ export default function checkForMinus(nums, result) {
 			result.hasSpecificValue = true;
 			result.returnValue = NAN;
 			break;
-		} else if (isPositiveInfinite(num)) {
+		} else if (isPositiveInfinite(num) && !hasInfinity) {
 			result.hasSpecificValue = true;
 			infinityIndex = i;
 			hasInfinity = true;
-		} else if (isNegativeInfinite(num)) {
+		} else if (isNegativeInfinite(num) && !hasNegativeInfinity) {
 			result.hasSpecificValue = true;
 			negativeInfinityIndex = i;
 			hasNegativeInfinity = true;
@@ -33,13 +33,37 @@ export default function checkForMinus(nums, result) {
 	}
 
 	if (hasInfinity && hasNegativeInfinity) {
-		if (infinityIndex < negativeInfinityIndex) return INFINITY;
-		if (infinityIndex > negativeInfinityIndex) return NEGATIVE_INFINITY;
+		if (infinityIndex < negativeInfinityIndex) {
+			result.returnValue = INFINITY;
+			return;
+		}
+
+		if (infinityIndex > negativeInfinityIndex) {
+			result.returnValue = NEGATIVE_INFINITY;
+		}
 	} else if (hasInfinity) {
-		if (infinityIndex > 0) return NEGATIVE_INFINITY;
-		return INFINITY;
+		if (infinityIndex > 0) {
+			if (isPositiveInfinite(nums[0])) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			result.returnValue = NEGATIVE_INFINITY;
+			return;
+		}
+
+		result.returnValue = INFINITY;
 	} else if (hasNegativeInfinity) {
-		if (negativeInfinityIndex > 0) return INFINITY;
-		return NEGATIVE_INFINITY;
+		if (negativeInfinityIndex > 0) {
+			if (isNegativeInfinite(nums[0])) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			result.returnValue = INFINITY;
+			return;
+		}
+
+		result.returnValue = NEGATIVE_INFINITY;
 	}
 }
