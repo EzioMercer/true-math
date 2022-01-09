@@ -95,8 +95,9 @@ Table of specific values (permutation does not change the result):
 |:------:|:-------:|:-------:|
 |  NaN   |   Any   |   NaN   |
 |  Inf   | &pm;Inf |   Inf   |
+|  Inf   | Number  |   Inf   |
 |  -Inf  |  -Inf   |  -Inf   |
-| Number | &pm;Inf | &pm;Inf |
+|  -Inf  | Number  | Number  |
 
 * `difference (nums: [string]): string`
 
@@ -164,6 +165,7 @@ Table of specific values:
 |  &pm;Inf   |     0      | &pm;Inf |
 |     0      |  &pm;Inf   |    0    |
 | &pm;Number |     0      | &pm;Inf |
+|     0      |     0      |   NaN   |
 
 ## License
 GPL-3.0-only

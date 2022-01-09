@@ -3,67 +3,67 @@ import {INFINITY, NAN, NEGATIVE_INFINITY} from "../../main/constants.js";
 import isPositiveInfinite from "../specificValue/isPositiveInfinite.js";
 import isNegativeInfinite from "../specificValue/isNegativeInfinite.js";
 
-export default function checkForMinus(nums, result) {
-	let hasInfinity = false;
-	let infinityIndex = -1;
-	let hasNegativeInfinity = false;
-	let negativeInfinityIndex = -1;
+/*
+ a  b  c  |  -
+--------------
+ x  i -i  |  N
+ x -i  i  |  N
+ i  i  x  |  N
+-i -i  x  |  N
+ x -i  x  |  i
+ i  x  x  |  i
+ x  i  x  | -i
+-i  x  x  | -i
+*/
 
-	for (let i = 0; i < nums.length; ++i) {
+export default function checkForMinus(nums, result) {
+	if (isNaN(nums[0])) {
+		result.hasSpecificValue = true;
+		result.returnValue = NAN;
+		return;
+	}
+
+	const isFirstInfinity = isPositiveInfinite(nums[0]);
+	const isFirstNegativeInfinity = isNegativeInfinite(nums[0]);
+
+	let isAnotherInfinity = false;
+	let isAnotherNegativeInfinity = false;
+
+	for (let i = 1; i < nums.length; ++i) {
 
 		const num = nums[i];
 
 		if (isNaNum(num)) {
 			result.hasSpecificValue = true;
 			result.returnValue = NAN;
-			break;
-		} else if (isPositiveInfinite(num) && !hasInfinity) {
+			return;
+		} else if (isPositiveInfinite(num)) {
 			result.hasSpecificValue = true;
-			infinityIndex = i;
-			hasInfinity = true;
-		} else if (isNegativeInfinite(num) && !hasNegativeInfinity) {
-			result.hasSpecificValue = true;
-			negativeInfinityIndex = i;
-			hasNegativeInfinity = true;
-		}
 
-		if (hasInfinity && hasNegativeInfinity) {
-			break;
+			if (isFirstInfinity || isAnotherNegativeInfinity) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			isAnotherInfinity = true;
+		} else if (isNegativeInfinite(num)) {
+			result.hasSpecificValue = true;
+
+			if (isFirstNegativeInfinity || isAnotherInfinity) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			isAnotherNegativeInfinity = true;
 		}
 	}
 
-	if (hasInfinity && hasNegativeInfinity) {
-		if (infinityIndex < negativeInfinityIndex) {
-			result.returnValue = INFINITY;
-			return;
-		}
-
-		if (infinityIndex > negativeInfinityIndex) {
-			result.returnValue = NEGATIVE_INFINITY;
-		}
-	} else if (hasInfinity) {
-		if (infinityIndex > 0) {
-			if (isPositiveInfinite(nums[0])) {
-				result.returnValue = NAN;
-				return;
-			}
-
-			result.returnValue = NEGATIVE_INFINITY;
-			return;
-		}
-
+	if (isFirstInfinity || isAnotherNegativeInfinity) {
 		result.returnValue = INFINITY;
-	} else if (hasNegativeInfinity) {
-		if (negativeInfinityIndex > 0) {
-			if (isNegativeInfinite(nums[0])) {
-				result.returnValue = NAN;
-				return;
-			}
+		return;
+	}
 
-			result.returnValue = INFINITY;
-			return;
-		}
-
+	if (isFirstNegativeInfinity || isAnotherInfinity) {
 		result.returnValue = NEGATIVE_INFINITY;
 	}
 }
