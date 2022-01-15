@@ -7,16 +7,15 @@ import {signUnsafe} from "../../helpers/sign.js";
 /*
  a  b |  +
 ----------
- 0  i |  N
- 0 -i |  N
- x  i |  i * sign(x)
- x -i | -i * sign(x)
+ 0 ?i |  N
+ x ?i | ?i * sign
 */
 
 export default function checkForMultiplication(nums, result) {
 	let hasInfinity = false;
 	let hasNegativeInfinity = false;
-	let needChangeSign = false;
+	let hasZero = false;
+	let isAnswerNegative = false;
 
 	for (const num of nums) {
 
@@ -26,28 +25,46 @@ export default function checkForMultiplication(nums, result) {
 			return;
 		} else if (isPositiveInfinite(num)) {
 			result.hasSpecificValue = true;
+
+			if (hasZero) {
+				result.returnValue = NAN;
+				return;
+			}
+
 			hasInfinity = true;
-			continue;
 		} else if (isNegativeInfinite(num)) {
 			result.hasSpecificValue = true;
+
+			if (hasZero) {
+				result.returnValue = NAN;
+				return;
+			}
+
 			hasNegativeInfinity = true;
+			isAnswerNegative = !isAnswerNegative;
 			continue;
-		} else if (num === '0' && (hasInfinity || hasNegativeInfinity)) {
-			result.returnValue = NAN;
-			return;
+		} else if (num === '0') {
+			hasZero = true;
+
+			if (hasInfinity || hasNegativeInfinity) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			continue;
 		}
 
-		if (signUnsafe(num) === -1) needChangeSign = !needChangeSign;
+		if (signUnsafe(num) === -1) isAnswerNegative = !isAnswerNegative;
 	}
 
-	if (hasInfinity) {
-		if (needChangeSign) result.returnValue = NEGATIVE_INFINITY;
+	if (hasInfinity || hasNegativeInfinity) {
+		if (isAnswerNegative) result.returnValue = NEGATIVE_INFINITY;
 		else result.returnValue = INFINITY;
 		return;
 	}
 
-	if (hasNegativeInfinity) {
-		if (needChangeSign) result.returnValue = INFINITY;
-		else result.returnValue = NEGATIVE_INFINITY;
+	if (hasZero) {
+		result.hasSpecificValue = true;
+		result.returnValue = '0';
 	}
 }

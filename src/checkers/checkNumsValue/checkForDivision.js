@@ -1,40 +1,73 @@
-import {isNaNum} from "../checkers.js";
+import {isInfinite, isNaNum} from "../checkers.js";
 import {INFINITY, NAN, NEGATIVE_INFINITY} from "../../main/constants.js";
 import isPositiveInfinite from "../specificValue/isPositiveInfinite.js";
 import isNegativeInfinite from "../specificValue/isNegativeInfinite.js";
+import {signUnsafe} from "../../helpers/sign.js";
+
+/*
+ a  b  c  |  /
+--------------
+ 0  0  x  |  N
+?i ?i  x  |  N
+ x  0 ?i  |  N
+ x  0  x  | ?i * sign
+ x ?i  x  |  0
+ 0  x  x  |  0
+*/
 
 export default function checkForDivision(nums, result) {
-	let hasInfinity = false;
-	let infinityIndex;
-	let hasNegativeInfinity = false;
-	let negativeInfinityIndex;
+	if (isNaN(nums[0])) {
+		result.hasSpecificValue = true;
+		result.returnValue = NAN;
+		return;
+	}
 
-	for (let i = 0; i < nums.length; ++i) {
+	const isFirstAnyInfinity = isInfinite(nums[0]);
+	const isFirstZero = nums[0] === '0';
+
+	let hasAnotherAnyInfinity = false;
+	let hasZero = false;
+	let isAnswerNegative = false;
+
+	for (let i = 1; i < nums.length; ++i) {
 
 		const num = nums[i];
 
-		if (isNaNum(num) || hasInfinity && hasNegativeInfinity) {
+		if (isNaNum(num)) {
 			result.hasSpecificValue = true;
 			result.returnValue = NAN;
 			return;
-		} else if (isPositiveInfinite(num)) {
+		} else if (isInfinite(num)) {
 			result.hasSpecificValue = true;
-			infinityIndex = i;
-			hasInfinity = true;
-		} else if (isNegativeInfinite(num)) {
+
+			if (isFirstAnyInfinity || hasZero) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			hasAnotherAnyInfinity = true;
+		} else if (num === '0') {
 			result.hasSpecificValue = true;
-			negativeInfinityIndex = i;
-			hasNegativeInfinity = true;
+
+			if (isFirstZero || hasAnotherAnyInfinity) {
+				result.returnValue = NAN;
+				return;
+			}
+
+			hasZero = true;
 		}
+
+		if (signUnsafe(num) === -1) isAnswerNegative = !isAnswerNegative;
 	}
 
-	if (hasInfinity) {
-		if (infinityIndex > 0) return '0';
-		return INFINITY;
+	if (hasZero) {
+		if (isAnswerNegative) result.returnValue = NEGATIVE_INFINITY;
+		else result.returnValue = INFINITY;
+		return;
 	}
 
-	if (hasNegativeInfinity) {
-		if (negativeInfinityIndex > 0) return '0';
-		return NEGATIVE_INFINITY;
+	if (hasAnotherAnyInfinity || isFirstZero) {
+		result.hasSpecificValue = true;
+		result.returnValue = '0';
 	}
 }

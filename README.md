@@ -153,6 +153,8 @@ Table of specific values (permutation does not change the result):
 
 Returns quotient of first number and others
 
+`accuracy` must be a non-negative integer number and equal `'8'` if not defined
+
 Table of specific values:
 
 |    Num1    |    Num2    | Return  |

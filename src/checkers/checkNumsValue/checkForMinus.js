@@ -7,13 +7,11 @@ import isNegativeInfinite from "../specificValue/isNegativeInfinite.js";
  a  b  c  |  -
 --------------
  x  i -i  |  N
- x -i  i  |  N
  i  i  x  |  N
 -i -i  x  |  N
  x -i  x  |  i
- i  x  x  |  i
  x  i  x  | -i
--i  x  x  | -i
+?i  x  x  | ?i
 */
 
 export default function checkForMinus(nums, result) {
@@ -26,8 +24,8 @@ export default function checkForMinus(nums, result) {
 	const isFirstInfinity = isPositiveInfinite(nums[0]);
 	const isFirstNegativeInfinity = isNegativeInfinite(nums[0]);
 
-	let isAnotherInfinity = false;
-	let isAnotherNegativeInfinity = false;
+	let hasAnotherInfinity = false;
+	let hasAnotherNegativeInfinity = false;
 
 	for (let i = 1; i < nums.length; ++i) {
 
@@ -40,30 +38,30 @@ export default function checkForMinus(nums, result) {
 		} else if (isPositiveInfinite(num)) {
 			result.hasSpecificValue = true;
 
-			if (isFirstInfinity || isAnotherNegativeInfinity) {
+			if (isFirstInfinity || hasAnotherNegativeInfinity) {
 				result.returnValue = NAN;
 				return;
 			}
 
-			isAnotherInfinity = true;
+			hasAnotherInfinity = true;
 		} else if (isNegativeInfinite(num)) {
 			result.hasSpecificValue = true;
 
-			if (isFirstNegativeInfinity || isAnotherInfinity) {
+			if (isFirstNegativeInfinity || hasAnotherInfinity) {
 				result.returnValue = NAN;
 				return;
 			}
 
-			isAnotherNegativeInfinity = true;
+			hasAnotherNegativeInfinity = true;
 		}
 	}
 
-	if (isFirstInfinity || isAnotherNegativeInfinity) {
+	if (isFirstInfinity || hasAnotherNegativeInfinity) {
 		result.returnValue = INFINITY;
 		return;
 	}
 
-	if (isFirstNegativeInfinity || isAnotherInfinity) {
+	if (isFirstNegativeInfinity || hasAnotherInfinity) {
 		result.returnValue = NEGATIVE_INFINITY;
 	}
 }

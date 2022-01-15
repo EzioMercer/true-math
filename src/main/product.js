@@ -79,11 +79,7 @@ function productUnsafe(nums) {
 	let product = nums[0];
 
 	for (let i = 1; i < nums.length; ++i) {
-		const num = nums[i];
-
-		if (product === '0' || num === '0') return '0';
-
-		product = product2nums(product, num);
+		product = product2nums(product, nums[i]);
 	}
 
 	return product;

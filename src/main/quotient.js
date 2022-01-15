@@ -63,24 +63,7 @@ export function quotientUnsafe(nums, accuracy) {
 	let quotient = nums[0];
 
 	for (let i = 1; i < nums.length; ++i) {
-		const num = nums[i];
-
-		if (quotient === '0') {
-			if (num === '0') {
-				quotient = 'NaN';
-				break;
-			}
-
-			continue;
-		}
-
-		if (num === '0') {
-			quotient = signUnsafe(quotient) === 1 ? '' : '-';
-			quotient += 'Infinity';
-			break;
-		}
-
-		quotient = quotient2nums(quotient, num, accuracy);
+		quotient = quotient2nums(quotient, nums[i], accuracy);
 	}
 
 	return quotient;
@@ -92,12 +75,12 @@ export default function quotient(nums, accuracy = '8') {
 
 	if (accuracy !== undefined) {
 		if (typeof (accuracy) !== 'string') throw new Error('Accuracy must be a string');
-		if (!(/^\d+$/.test(accuracy))) throw new Error('Accuracy must be a non negative integer number');
+		if (!(/^\d+$/.test(accuracy))) throw new Error('Accuracy must be a non-negative integer number');
 	}
 
 	nums.map(num => normalizeNumber(num));
 
-	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '*');
+	const {hasSpecificValue, returnValue} = checkNumsValue(nums, '/');
 
 	if (hasSpecificValue) return returnValue;
 

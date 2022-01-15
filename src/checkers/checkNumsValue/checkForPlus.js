@@ -7,9 +7,7 @@ import isNegativeInfinite from "../specificValue/isNegativeInfinite.js";
  a  b |  +
 ----------
  i -i |  N
--i  i |  N
- i  x |  i
--i  x | -i
+?i  x | ?i
 */
 
 export default function checkForPlus(nums, result) {
