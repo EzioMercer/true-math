@@ -1,6 +1,6 @@
-import {makeNumsSameLength, normalizeNumber, sign} from "../helpers/helpers.js";
-import {abs} from "../true-math.js";
-import {checkNumsValue, ifValidNums} from "../checkers/checkers.js";
+import {makeNumsSameLength, normalizeNumber, sign} from '../helpers/helpers.js';
+import {abs} from '../true-math.js';
+import {checkNumsValue, ifValidNums} from '../checkers/checkers.js';
 
 export function compareUnsafe(absNum1, absNum2) {
 

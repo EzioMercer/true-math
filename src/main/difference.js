@@ -1,7 +1,7 @@
-import {checkNumsValue, ifValidArray, isInfinite, isNaNum, isSpecificValue} from '../checkers/checkers.js';
-import changeSign from "../helpers/changeSign.js";
-import {sum2nums, sumUnsafe} from "./sum.js";
-import {normalizeNumber} from "../helpers/helpers.js";
+import {checkNumsValue, ifValidArray} from '../checkers/checkers.js';
+import changeSign from '../helpers/changeSign.js';
+import {sum2nums, sumUnsafe} from './sum.js';
+import {normalizeNumber} from '../helpers/helpers.js';
 
 export function difference2nums(num1, num2) {
 	return sum2nums(num1, changeSign(num2));

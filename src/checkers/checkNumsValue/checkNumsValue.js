@@ -1,15 +1,15 @@
-import checkForPlus from "./checkForPlus.js";
-import checkForMinus from "./checkForMinus.js";
-import checkForMultiplication from "./checkForMultiplication.js";
-import checkForDivision from "./checkForDivision.js";
-import checkForComparison from "./checkForComparison.js";
+import checkForPlus from './checkForPlus.js';
+import checkForMinus from './checkForMinus.js';
+import checkForMultiplication from './checkForMultiplication.js';
+import checkForDivision from './checkForDivision.js';
+import checkForComparison from './checkForComparison.js';
 
 export default function checkNumsValue(nums, operation) {
 
 	const result = {
 		hasSpecificValue: false,
-		returnValue: ''
-	}
+		returnValue: '',
+	};
 
 	switch (operation) {
 		case '+':

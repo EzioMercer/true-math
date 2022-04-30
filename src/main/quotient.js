@@ -1,11 +1,11 @@
-import ifValidArray from "../checkers/ifValidArray.js";
-import {normalizeNumber} from "../helpers/helpers.js";
-import {signUnsafe} from "../helpers/sign.js";
-import {difference2nums} from "./difference.js";
-import {absUnsafe} from "./abs.js";
-import {sum2nums} from "./sum.js";
-import {product2nums} from "./product.js";
-import {checkNumsValue} from "../checkers/checkers.js";
+import ifValidArray from '../checkers/ifValidArray.js';
+import {normalizeNumber} from '../helpers/helpers.js';
+import {signUnsafe} from '../helpers/sign.js';
+import {difference2nums} from './difference.js';
+import {absUnsafe} from './abs.js';
+import {sum2nums} from './sum.js';
+import {product2nums} from './product.js';
+import {checkNumsValue} from '../checkers/checkers.js';
 
 function quotient2nums(num1, num2, accuracy) {
 

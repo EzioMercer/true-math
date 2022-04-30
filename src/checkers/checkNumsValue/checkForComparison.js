@@ -1,7 +1,7 @@
-import {isNaNum} from "../checkers.js";
-import {INFINITY, NAN} from "../../main/constants.js";
-import isPositiveInfinite from "../specificValue/isPositiveInfinite.js";
-import isNegativeInfinite from "../specificValue/isNegativeInfinite.js";
+import {isNaNum} from '../checkers.js';
+import {INFINITY, NAN} from '../../main/constants.js';
+import isPositiveInfinite from '../specificValue/isPositiveInfinite.js';
+import isNegativeInfinite from '../specificValue/isNegativeInfinite.js';
 
 export default function checkForComparison(nums) {
 	const num1 = nums[0];
