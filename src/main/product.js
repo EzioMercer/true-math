@@ -1,10 +1,10 @@
-import ifValidArray from "../checkers/ifValidArray.js";
-import {makeNumsSameLength, normalizeNumber, sign, split} from "../helpers/helpers.js";
-import {sum2nums, sumUnsafe} from "./sum.js";
-import {differenceUnsafe} from "./difference.js";
-import {absUnsafe} from "./abs.js";
-import {signUnsafe} from "../helpers/sign.js";
-import {checkNumsValue} from "../checkers/checkers.js";
+import ifValidArray from '../checkers/ifValidArray.js';
+import {makeNumsSameLength, normalizeNumber, split} from '../helpers/helpers.js';
+import {sum2nums, sumUnsafe} from './sum.js';
+import {differenceUnsafe} from './difference.js';
+import {absUnsafe} from './abs.js';
+import {signUnsafe} from '../helpers/sign.js';
+import {checkNumsValue} from '../checkers/checkers.js';
 
 const cachedProducts = new Map();
 

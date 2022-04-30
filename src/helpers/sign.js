@@ -1,4 +1,4 @@
-import {normalizeNumber} from "./helpers.js";
+import {normalizeNumber} from './helpers.js';
 
 export function signUnsafe(num) {
 	if (num[0] === '-') return -1;

@@ -1,4 +1,4 @@
-import {padNums, split} from "./helpers.js";
+import {padNums, split} from './helpers.js';
 
 export default function makeNumsSameLength(num1, num2) {
 

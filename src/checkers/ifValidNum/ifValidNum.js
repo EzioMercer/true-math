@@ -1,6 +1,6 @@
-import ifNumIsString from "./ifNumIsString.js";
-import ifNonEmptyNum from "./ifNonEmptyNum.js";
-import ifValidFormat from "./ifValidFormat.js";
+import ifNumIsString from './ifNumIsString.js';
+import ifNonEmptyNum from './ifNonEmptyNum.js';
+import ifValidFormat from './ifValidFormat.js';
 
 
 export default function ifValidNum(num) {

@@ -1,10 +1,8 @@
-import {checkNumsValue, ifValidArray, isInfinite, isNaNum} from '../checkers/checkers.js';
+import {checkNumsValue, ifValidArray} from '../checkers/checkers.js';
 import {makeNumsSameLength, normalizeNumber} from '../helpers/helpers.js';
-import {compareUnsafe} from "./compare.js";
-import {absUnsafe} from "./abs.js";
-import {signUnsafe} from "../helpers/sign.js";
-import isPositiveInfinite from "../checkers/specificValue/isPositiveInfinite.js";
-import isNegativeInfinite from "../checkers/specificValue/isNegativeInfinite.js";
+import {compareUnsafe} from './compare.js';
+import {absUnsafe} from './abs.js';
+import {signUnsafe} from '../helpers/sign.js';
 
 function sumDigits(digit1, digit2, sum, memory, multiplier) {
 

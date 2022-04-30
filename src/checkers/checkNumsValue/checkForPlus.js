@@ -1,7 +1,7 @@
-import {isNaNum} from "../checkers.js";
-import {INFINITY, NAN, NEGATIVE_INFINITY} from "../../main/constants.js";
-import isPositiveInfinite from "../specificValue/isPositiveInfinite.js";
-import isNegativeInfinite from "../specificValue/isNegativeInfinite.js";
+import {isNaNum} from '../checkers.js';
+import {INFINITY, NAN, NEGATIVE_INFINITY} from '../../main/constants.js';
+import isPositiveInfinite from '../specificValue/isPositiveInfinite.js';
+import isNegativeInfinite from '../specificValue/isNegativeInfinite.js';
 
 /*
  a  b |  +
