@@ -11,14 +11,14 @@ npm install true-math --save
 Just import need functions from `true-math` library and use them
 
 Available functions:
-* abs
-* ceil
-* compare
-* difference
-* floor
-* product
-* sum
-* quotient
+* [abs](#abs)
+* [ceil](#ceil)
+* [compare](#compare)
+* [difference](#difference)
+* [floor](#floor)
+* [product](#product)
+* [sum](#sum)
+* [quotient](#quotient)
 
 ## Example
 
@@ -58,7 +58,8 @@ console.log('Difference is : ', subtract(testData));
 `Number` - `-Number or +Number or 0`
 
 ### Functions
-* `abs(num: string): string`
+<a id="abs"></a>
+### `abs(num: string): string`
 
 Returns absolute value of number
 
@@ -69,8 +70,8 @@ Table of specific values:
 |   NaN   |  NaN   |
 | &pm;Inf |  Inf   |
 
-
-* `ceil(num: string): string`
+<a id="ceil"></a>
+### `ceil(num: string): string`
 
 If number has decimal part then returns the closest next integer
 
@@ -81,7 +82,8 @@ Table of specific values:
 |   NaN   |   NaN   |
 | &pm;Inf | &pm;Inf |
 
-* `compare(num1: string, num2: string): string`
+<a id="compare"></a>
+### `compare(num1: string, num2: string): string`
 
 Returns -1 if num1 < num2
 
@@ -99,7 +101,8 @@ Table of specific values (permutation does not change the result):
 |  -Inf  |  -Inf   |  -Inf   |
 |  -Inf  | Number  | Number  |
 
-* `difference (nums: [string]): string`
+<a id="difference"></a>
+### `difference(nums: [string]): string`
 
 Returns difference of first number and others
 
@@ -116,11 +119,20 @@ Table of specific values:
 | &pm;Inf | Number  | &pm;Inf |
 | Number  | &pm;Inf | &mp;Inf |
 
-* `floor(num: string): string`
+<a id="floor"></a>
+### `floor(num: string): string`
 
 If number has decimal part then returns the closest previous integer
 
-* `product (nums: [string]): string`
+Table of specific values:
+
+|   Num   | Return  |
+|:-------:|:-------:|
+|   NaN   |   NaN   |
+| &pm;Inf | &pm;Inf |
+
+<a id="product"></a>
+### `product(nums: [string]): string`
   
 Returns product of first number and others
 
@@ -135,7 +147,8 @@ Table of specific values (permutation does not change the result):
 |  -Inf   | &pm;Number | &mp;Inf |
 | &pm;Inf |     0      |   NaN   |
 
-* `sum (nums: [string]): string`
+<a id="sum"></a>
+### `sum(nums: [string]): string`
 
 Returns sum of first number and others
 
@@ -149,7 +162,8 @@ Table of specific values (permutation does not change the result):
 |  -Inf  |  -Inf   |  -Inf   |
 | Number | &pm;Inf | &pm;Inf |
 
-* `quotient (nums: [string], accuracy: string): string`
+<a id="quotient"></a>
+### `quotient(nums: [string], accuracy: string): string`
 
 Returns quotient of first number and others
 

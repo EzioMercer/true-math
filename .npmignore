@@ -6,7 +6,6 @@ node_modules
 
 #SETTINGS
 babel.config.json
-webpack.config.js
 
 #TESTS
 test
