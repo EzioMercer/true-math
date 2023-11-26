@@ -32,6 +32,6 @@
   },
   "homepage": "https://github.com/EzioMercer/true-math#readme",
   "devDependencies": {
-    "mocha": "^9.0.0"
+    "mocha": "^10.1.0"
   }
 }
