@@ -1,6 +1,6 @@
-import {ifValidNum, isSpecificValue} from "../checkers/checkers.js";
-import {normalizeNumber, sign, split} from "../helpers/helpers.js";
-import {sum2nums} from "./sum.js";
+import {ifValidNum, isSpecificValue} from '../checkers/checkers.js';
+import {normalizeNumber, sign, split} from '../helpers/helpers.js';
+import {sum2nums} from './sum.js';
 
 export function ceilUnsafe(num) {
 	const [integerPart, decimalPart] = split(num);
@@ -19,7 +19,7 @@ export default function ceil(num) {
 
 	ifValidNum(num);
 
-	if(isSpecificValue(num)) return num;
+	if (isSpecificValue(num)) return num;
 
-	return ceilUnsafe(normalizeNumber(num))
+	return ceilUnsafe(normalizeNumber(num));
 }
